@@ -1,0 +1,80 @@
+<?php
+    $product = Mage::registry('product');
+    $product_id = $product->getId();
+    $url_getshipping = $this->getUrl('Freteproduto');
+?>
+<div class="calculate-shipping">
+    <div class="calculate-shipping-form">
+        <strong class="title"><?php echo $this->__("Estimate value of shipping") ?></strong>
+        <div class="form">
+            <input type="text" pattern="[0-9]" name="zipcode" id="zipcode" placeholder="00000-000" maxlength="9"/>
+            <button type="button" class="button" id="btn-calc-shipping"><?php echo $this->__("Calculate") ?></button>
+        </div>
+        <span class="help">
+            <a href="http://www.buscacep.correios.com.br/" target="_blank"><?php echo $this->__("I do not know my zip") ?></a>
+        </span>
+    </div>
+    <div class="calculate-shipping-result"></div>
+</div>
+<script>
+//<![CDATA[
+jQuery(document).ready(function(){
+    var input = jQuery("#zipcode"),
+        button = jQuery("#btn-calc-shipping"),
+        button_loader = '<img src="<?php echo $this->getSkinUrl('facilestore/images/loader.gif')?>" />',
+        button_default = '<?php echo $this->__("Calculate") ?>',
+        result_container = jQuery(".calculate-shipping-result");
+
+    button.click(function(){
+        result_container.html("");
+        button.attr("disabled", true).html(button_loader);
+
+        if(input.val()!='' && input.val().length == 9){
+            var zipcode = input.val().replace("-", "");
+            var data = {
+                zipcode: zipcode,
+                product_id: '<?php echo $product_id ?>'
+            };
+            jQuery.ajax({
+                url: "<?php echo $url_getshipping?>",
+                data: data,
+                type: "GET",
+                success: function(data){
+                    var result = data;
+
+                    if(result != null && result != ''){
+                        button.attr("disabled", false).html(button_default);
+                        if(result.erro){
+                            alert(result.erro);
+                            return false;
+                        } else {
+                            console.log(result.rates);
+                            var content_result = '<ul>';
+                            if(result.rates && result.rates.length>0){
+                                for(var key=0; key<result.rates.length; key++){
+                                    var item = result.rates[key];
+                                    content_result += '<li><span class="title">' + item.title + '</span> <span> ' + item.price + ' </span></li>';
+                                }
+                            }
+                            content_result += '</ul>';
+                            result_container.html(content_result);
+                        }
+                    } else {
+                        button.attr("disabled", false).html(button_default);
+                        alert('<?php echo $this->__("There was an error, please try later") ?>');
+                    }
+                },
+                error: function(){
+                    button.attr("disabled", false).html(button_default);
+                    alert('<?php echo $this->__("There was an error, please try later") ?>');
+                }
+            });
+        } else{
+            input.focus();
+            button.attr("disabled", false).html(button_default);
+            alert('<?php echo $this->__("Fill in the zip") ?>');
+        }
+    });
+});
+//]]>
+</script>

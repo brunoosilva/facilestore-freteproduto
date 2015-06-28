@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <tabs>
+        <facilestore translate="label" module="Freteproduto">
+            <label>Facile Store Extensions</label>
+            <sort_order>100</sort_order>
+        </facilestore>
+    </tabs>
+    <sections>
+        <facilestore_freteproduto translate="label" module="Freteproduto">
+            <label>Cálculo de Frete</label>
+            <tab>facilestore</tab>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+
+            <groups>
+                <general translate="label" module="Freteproduto">
+                    <label>Configurações de cálculo de frete na tela do produto</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>1000</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+
+                    <fields>
+                        <enable translate="label">
+                            <label>Habilitar: </label>
+                            <comment>Habilitar cálculo de frete nos produtos.</comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </enable>
+                        <enable_jquery translate="label">
+                            <label>Habilitar jQuery: </label>
+                            <comment>Código requer o jQuery para realizar os efeitos e a busca em ajax, caso seu template não tenha habilite o jQuery e será incluído a última versão, usando CDN da jQuery.</comment>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                        </enable_jquery>
+                    </fields>
+                </general>
+            </groups>
+        </facilestore_freteproduto>
+    </sections>
+</config>

@@ -1,0 +1,16 @@
+<layout>
+    <catalog_product_view>
+        <!--<reference name="head">
+            <block type="core/text" name="cdn.jquery" ifconfig="facilestore_freteproduto/general/enable_jquery">
+                <action method="setText">
+                    <text>
+                        <![CDATA[<script type="text/javascript" src="//code.jquery.com/jquery-1.11.3.min.js"></script><script type="text/javascript">jQuery.noConflict();</script>]]>
+                    </text>
+                </action>
+            </block>
+        </reference>-->
+        <reference name="product.info">
+            <block type="Freteproduto/Cep" name="facilestore_freteproduto_cep"  template="facilestore/freteproduto/cep.phtml"/>
+        </reference>
+    </catalog_product_view>
+</layout>

@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Facilestore_Freteproduto>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Facilestore_Freteproduto>
+    </modules>
+</config>
